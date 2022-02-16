@@ -13,33 +13,34 @@
     // URL-Parameter
     $selectedPath;
     $selectedName;
+    $selectedItem;
+    
     if (isset($_GET['path']) && isset($_GET['name'])) {
         $selectedPath = urldecode($_GET['path']);
         $selectedName = urldecode($_GET['name']);
     } else {
         $selectedPath = "";
+        $selectedName = "";
     }
 
-    $selectedItem;
     if ($selectedPath != ""){
-        $selectedItem = new N2webFolderItem($selectedPath, $selectedName, 1);
+        $selectedItem = new N2webFolderItem($selectedPath, $selectedName, 1, true);
     }else{
         $selectedItem = $document_tree->children[0];
     }
     
-
-
-    
+    $breadcrumbs = $selectedItem->getBreadcrumbs();
 
     // template
-    $smarty->assign('name', 'Ned');
+
     $smarty->assign('language', $language);
     $smarty->assign('page_title', $page_title);
     $smarty->assign('template', $template);
     $smarty->assign('document_tree', $document_tree->getFileTree());
     $smarty->assign('selectedItem', $selectedItem);
-    $smarty->assign('selectedItemPath', $selectedItem->path . "/" . $selectedItem->fullName);
+    $smarty->assign('selectedItemPath', $selectedItem->path . "/" . $selectedItem->fileName);
     $smarty->assign('selectedId', $selectedItem->id);
+    $smarty->assign('breadcrumbs', $breadcrumbs);
     // echo $selectedItem;
     
 
