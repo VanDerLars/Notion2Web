@@ -1,50 +1,84 @@
 <?php
-    error_reporting(E_ALL);
-    require 'vendor/autoload.php';
-    $smarty = new Smarty();
+error_reporting(E_ALL);
+require 'vendor/autoload.php';
+$smarty = new Smarty();
 
-    // Config
-    include('config.php');
-    include('app/functions.php');
+// Config
+include('config.php');
+include('app/functions.php');
 
-    // $document_tree = getfolder('content');
-    $document_tree = new N2webFolderItem('content', 'content', 0);
+// $document_tree = getfolder('content');
+$document_tree = new N2webFolderItem('content', 'content', 0);
 
-    // URL-Parameter
-    $selectedPath;
-    $selectedName;
-    $selectedItem;
-    
-    if (isset($_GET['path']) && isset($_GET['name'])) {
-        $selectedPath = urldecode($_GET['path']);
-        $selectedName = urldecode($_GET['name']);
-    } else {
-        $selectedPath = "";
-        $selectedName = "";
+// URL-Parameter
+$selectedPath;
+$selectedName;
+$selectedItem;
+
+if (isset($_GET['path']) && isset($_GET['name'])) {
+    $selectedPath = urldecode($_GET['path']);
+    $selectedName = urldecode($_GET['name']);
+} else {
+    $selectedPath = "";
+    $selectedName = "";
+}
+
+if ($selectedPath != "") {
+    $selectedItem = new N2webFolderItem($selectedPath, $selectedName, 1, true);
+} else {
+    $firstItem = $document_tree->children[1];
+
+    $selectedItem = new N2webFolderItem($firstItem->path, $firstItem->fileName, 1, true);
+}
+
+$breadcrumbs = $selectedItem->getBreadcrumbs();
+
+// template
+
+$smarty->assign('language', $language);
+$smarty->assign('page_title', $page_title);
+$smarty->assign('domain', getDomain());
+$smarty->assign('template', $template);
+$smarty->assign('document_tree', $document_tree->getFileTree());
+$smarty->assign('selectedItem', $selectedItem);
+$smarty->assign('selectedItemPath', $selectedItem->path . "/" . $selectedItem->fileName);
+$smarty->assign('selectedId', $selectedItem->id);
+$smarty->assign('breadcrumbs', $breadcrumbs);
+$smarty->assign('menu_left', $menu_left);
+$smarty->assign('menu_right', $menu_right);
+$smarty->assign('footer_menu_left', $footer_menu_left);
+$smarty->assign('footer_menu_right', $footer_menu_right);
+$smarty->assign('main_logo_light', $main_logo_light);
+$smarty->assign('main_logo_dark', $main_logo_dark);
+
+
+// compile
+if (isset($_POST["search"]) || isset($_GET['q'])) {
+    // search was made->get results
+    $searchString = '';
+    if (isset($_POST["search"])){
+        //search over post object (search field)
+        $searchString = $_POST["search"];
     }
-
-    if ($selectedPath != ""){
-        $selectedItem = new N2webFolderItem($selectedPath, $selectedName, 1, true);
-    }else{
-        $selectedItem = $document_tree->children[0];
+    if (isset($_GET['q'])){
+        //search over parameter
+        $searchString = $_GET["q"];
     }
     
-    $breadcrumbs = $selectedItem->getBreadcrumbs();
+    $search = $document_tree->getSearchResults($searchString);
 
-    // template
+    $rank = array_column($search, 'rank');
 
-    $smarty->assign('language', $language);
-    $smarty->assign('page_title', $page_title);
-    $smarty->assign('template', $template);
-    $smarty->assign('document_tree', $document_tree->getFileTree());
-    $smarty->assign('selectedItem', $selectedItem);
-    $smarty->assign('selectedItemPath', $selectedItem->path . "/" . $selectedItem->fileName);
-    $smarty->assign('selectedId', $selectedItem->id);
-    $smarty->assign('breadcrumbs', $breadcrumbs);
-    // echo $selectedItem;
-    
+    array_multisort($rank, SORT_DESC, $search);
 
-    // compile
-    $smarty->display('app/templates/'.$template.'/index.tpl');
+    $smarty->assign('is_search', true);
+    $smarty->assign('searchResults', $search);
+    $smarty->assign('searchTerm', $searchString);
+    $smarty->assign('searchBreadcrumbs', searchBreadcrumbs($searchString));
+} else {
+    // normal page call
+    $smarty->assign('searchTerm', '');
+    $smarty->assign('is_search', false);
+}
 
-?>
+$smarty->display('app/templates/' . $template . '/index.tpl');
