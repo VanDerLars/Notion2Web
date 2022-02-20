@@ -142,7 +142,7 @@ class N2webFolderItem
         if ($par != NULL) {
             $ret = $par->getBreadcrumbs();
             $dev = '<div class="n2web_breadcrumb_devider"></div>';
-            $itm = '<div class="n2web_breadcrumb_item"><a href="' . getDomain() . '?path=' . urlencode($this->path) . '&name=' . urlencode($this->fileName) . '&id=' . $this->id . '">' . $this->title . '</a></div>';
+            $itm = '<div class="n2web_breadcrumb_item"><a href="?path=' . urlencode($this->path) . '&name=' . urlencode($this->fileName) . '&id=' . $this->id . '">' . $this->title . '</a></div>';
 
             if ($this->name == '') {
                 // prevent a rare problem
@@ -255,7 +255,7 @@ class N2webFolderItem
                     } else {
                         $class_has_children = 'no_children';
                     }
-                    $ret .= '<li class="n2web_file ' . $class_has_children . '" id="' . $child->id . '_file" data-n2webid="' . $child->id . '">' . $div_has_children . '<a href="' . getDomain() . '?path=' . urlencode($child->path) . '&name=' . urlencode($child->fileName) . '&id=' . $child->id . '">' . $child->title . '</a></li>';
+                    $ret .= '<li class="n2web_file ' . $class_has_children . '" id="' . $child->id . '_file" data-n2webid="' . $child->id . '">' . $div_has_children . '<a href="?path=' . urlencode($child->path) . '&name=' . urlencode($child->fileName) . '&id=' . $child->id . '">' . $child->title . '</a></li>';
                 }
             } else {
                 // directory
@@ -362,7 +362,7 @@ class N2webFolderItem
 
                         $item = new N2webFolderItem($itemPath, $itemName, 1);
 
-                        $newUrl = getDomain() . '?path=' . urlencode($this->path . '/' . $item->path) . '&name=' . urlencode($item->fileName) . '&id=' . $item->id;
+                        $newUrl = '?path=' . urlencode($this->path . '/' . $item->path) . '&name=' . urlencode($item->fileName) . '&id=' . $item->id;
 
                         $newUrl = str_replace('amp%3B', '', $newUrl);
                         $newUrl = str_replace('%3B', '', $newUrl);
