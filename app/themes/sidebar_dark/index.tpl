@@ -82,7 +82,7 @@
 
                         <div class="n2web_searchResults_inner">
                             {foreach from=$searchResults key=res item=i}
-                                <a href="{$domain}?path={$i.path}&name={$i.fileName}&id={$i.id}">
+                                <a href="?path={$i.path}&name={$i.fileName}&id={$i.id}">
                                     <div class="n2web_search_result">
                                         <h3 class="n2web_search_result_name">{$i.title}</h3>
                                         <hr>
