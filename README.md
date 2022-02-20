@@ -14,14 +14,13 @@ N2Web (this program here) takes the Notion HTML export and turns it into an own 
 
 # the compact feature list of N2Web
 - ⏱️ **Set up in minutes** - no programming knowledge required. Simple drag and drop files into the "contents" folder and you're good to go.
-- ⚡ **Super fast**
-- 🎛️ **Editable menus**
+- ⚡ **Super fast** (loads 10x faster than a shared Notion page)
+- 🎛️ **Editable menus** and navigation
 - 🎮 Self hosting **gives you control**
 - 🛂 technically **GDPR compliant** right away (if you host in Europe)
 - 📐 **Themeable** - 4 themes already installed
 - 👩‍💻 **Hackable** - easy code, simple structure
 - 🔎 **Inbuilt search**, which shows the relevance of a search result and calculates the importantcy of the search term to page.
-- 
 
 ### Why shouldn't I use the inbuilt "share to web function" in Notion?
 First of all: you can! The share-to-web function in Notion is great. But it also has some problems, which N2Web tries to solve:
