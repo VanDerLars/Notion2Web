@@ -16,7 +16,7 @@ First of all: you can! The share-to-web function in Notion is great. But it also
 - **Data privacy issues/GDPR:** Notion is a company, based in the US. Companies from the EU are not allowes to use US services right away. In fact, if a company wants to use Notion in a 100% legally secure way, they will have hard time to achieve that (cookie consent, privacy information). 
   - **→ N2Web solves this because you'll host the application yourself. Also vanilla N2Web doesn't create a cookie and don't include external ressources like fonts or something.**
 - **Styling:** If you use a shared page from Notion, you have to stick with their design. While Notion it self looks reasonable, it wont fit into you companies or personal corporate identity necessarily. 
-  - **→ N2Web it 100% themeable. You can change nearly everything with little knowledge of CSS and HTML.**
+  - **→ N2Web is 100% themeable. You can change nearly everything with little knowledge of CSS and HTML.**
 - **Versionizing:** Sometimes you may don't want to share every single change to the weg directly. Notion publishs changes instantly. While this is most of the time a nice feature, sometimes you simply want to decide yourself when you publish something. 
   - **→ With N2Web you decide when you update the app content.**
 - **Navigation & Logos:** You wont be able to add more Links, a Logo and Buttons to the top-level Navigation of Notion. 
