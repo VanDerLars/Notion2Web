@@ -46,7 +46,20 @@ The HTML export is really well made, but it lacks on some features:
 
 ## Dokumentation & Demo
 I've set up a more complete documentation as demo here:
-→ LINK
+https://notion2web.lehmann.wtf/
 
 ## Customization
-Fell free to customize it. You'll find sophisticated informations in documentation.
+Feel free to customize it. You'll find sophisticated informations in documentation.
+
+
+# the compact feature list of N2Web
+- Set up in minutes - no programming knowledge required. Simple drag and drop files into the "contents" folder and you're good to go.
+- Super fast
+- Editable menus
+- Self hosting gives you control
+- technically GDPR compliant right away (if you host in Europe)
+- Themable - 4 themes aleady installed
+- Hackable - easy code, simple structure
+- Inbuilt search, which shows the relevance of a search result and calculates the importancy of the search term to page.
+
+
