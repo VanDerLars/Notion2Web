@@ -33,17 +33,25 @@ if ($selectedPath != "") {
 
 $breadcrumbs = $selectedItem->getBreadcrumbs();
 
-// template
+// themes
 
+// header and basic informations
 $smarty->assign('language', $language);
 $smarty->assign('page_title', $page_title);
+$smarty->assign('seo_title', $seo_title);
+$smarty->assign('seo_description', $seo_description);
+$smarty->assign('seo_robots', $seo_robots);
 $smarty->assign('domain', getDomain());
-$smarty->assign('template', $template);
+$smarty->assign('theme', $theme);
+
+// the page contents
 $smarty->assign('document_tree', $document_tree->getFileTree());
 $smarty->assign('selectedItem', $selectedItem);
 $smarty->assign('selectedItemPath', $selectedItem->path . "/" . $selectedItem->fileName);
 $smarty->assign('selectedId', $selectedItem->id);
 $smarty->assign('breadcrumbs', $breadcrumbs);
+
+// the menus
 $smarty->assign('menu_left', $menu_left);
 $smarty->assign('menu_right', $menu_right);
 $smarty->assign('footer_menu_left', $footer_menu_left);
@@ -81,4 +89,4 @@ if (isset($_POST["search"]) || isset($_GET['q'])) {
     $smarty->assign('is_search', false);
 }
 
-$smarty->display('app/templates/' . $template . '/index.tpl');
+$smarty->display('app/themes/' . $theme . '/index.tpl');

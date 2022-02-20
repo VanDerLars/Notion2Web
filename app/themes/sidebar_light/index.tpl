@@ -7,12 +7,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{$page_title}</title>
+
+    <title>{$seo_title}</title>
+    <meta name="description" content="{$seo_description}">
+    <meta name="robots" content="{$seo_robots}">
+
     <link rel="stylesheet" href="app/css/n2web.css">
-    <link rel="stylesheet" href="app/templates/{$template}/theme.css">
+    <link rel="stylesheet" href="app/themes/{$theme}/theme.css">
 
     <script src="app/js/jquery-3.6.0.min.js"></script>
-    <script src="app/templates/{$template}/theme.js"></script>
+    <script src="app/themes/{$theme}/theme.js"></script>
 </head>
 
 <body>

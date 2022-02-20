@@ -44,14 +44,12 @@ $(document).ready(function () {
 
 function toggleMenuOpen(n2webid, manual){
     var cl = '';
-    console.log(manual);
     if (manual == true){
         $('#'+n2webid+'_dir').addClass('manual');
         $('#'+n2webid+'_file').addClass('manual');
     }else{
         // cl = 'opened';
     }
-    console.log(cl);
 
     if($('#'+n2webid+'_dir').hasClass('opened')){
         $('#'+n2webid+'_dir').removeClass('opened');

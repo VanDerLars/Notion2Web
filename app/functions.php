@@ -19,6 +19,7 @@ class N2webFolderItem
     public $parent;
     public $exists;
 
+    private $isHTMLFile = false;
     private $searchBody;
 
     function __construct($path_, $name_, $type_, $loadHtml = false, $parent_ = NULL)
@@ -35,6 +36,8 @@ class N2webFolderItem
 
         $this->exists = file_exists($path_ . "/" . $name_);
 
+        $this->isHTMLFile = str_contains($this->fileName, '.html');
+
         array_pop($spl);
         $r = '';
         foreach ($spl as $itm) {
@@ -47,6 +50,7 @@ class N2webFolderItem
         }
         if ($this->objectType == 1 && ($this->name != "" || $this->id != "")) {
             $this->title = $this->getPageTitle();
+        } else {
         }
 
 
@@ -93,8 +97,12 @@ class N2webFolderItem
         $location = $this->path . '/' . $this->fileName;
         $location = str_replace('amp%3B', '', $location);
         $location = str_replace('%3B', '', $location);
-        if ($this->exists) {
-            $this->html = $this->sanitizeNotionHtml(file_get_contents($location));
+
+        if ($this->exists && $this->isHTMLFile) {
+            $theHTML = file_get_contents($location);
+
+            $this->html = $this->sanitizeNotionHtml($theHTML);
+            $this->htmlLoaded = true;
         } else {
             $this->html = "";
         }
@@ -148,7 +156,7 @@ class N2webFolderItem
         }
     }
 
-    
+
     public function getBreadpath()
     {
         $par = $this->parent;
@@ -216,15 +224,15 @@ class N2webFolderItem
         // reorder the array
         $theNewOrder = []; //easter egg :)
 
-        for($i=0; $i < count($allChldrn); $i++) {
-            if($allChldrn[$i]->objectType == 0 && $allChldrn[$i + 1]->objectType == 1){
-                array_push($theNewOrder, $allChldrn[$i+1]);
+        for ($i = 0; $i < count($allChldrn); $i++) {
+            if ($allChldrn[$i]->objectType == 0 && $allChldrn[$i + 1]->objectType == 1) {
+                array_push($theNewOrder, $allChldrn[$i + 1]);
                 array_push($theNewOrder, $allChldrn[$i]);
                 $i++;
-            }else{
+            } else {
                 array_push($theNewOrder, $allChldrn[$i]);
             }
-         }
+        }
 
 
 
@@ -282,7 +290,7 @@ class N2webFolderItem
         if ($this_body_match) {
             $html = $this_body_match[0];
         } else {
-            $html = 'no content';
+            $html = 'no content: ' . $this->path . '/' . $this->fileName;
         }
 
         // 2. replace images
@@ -309,20 +317,33 @@ class N2webFolderItem
             }
         }
 
+
+
+
         // 3.replace hyperlinks
         preg_match_all('/<a[^>]* href="([^"]*)"/im', $html, $link_match);
         $this_match = $link_match[1];
-
+        $imageFormats = ['.png','.svg','.bmp','.jpg','.jpeg','.webp', '.tif', '.tiff', '.gif', '.eps', '.apng', '.avif', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.ico', '.cur'];
+               
         if ($this_match) {
             $arr_length = count($this_match);
             for ($i = 0; $i < $arr_length; $i++) {
                 // for each link in document
                 $oldUrl = $this_match[$i];
                 $workUrl = urldecode($this_match[$i]);
-                if (str_ends_with($workUrl, '.png') == false) {
+
+                // check if url is an image
+                $isImage = false;
+                foreach($imageFormats as $format){
+                    if (str_ends_with($workUrl, $format)){
+                        $isImage = true;
+                    }
+                }
+
+                if ($isImage == false) {
                     // no image link
-                    if (str_starts_with($workUrl, 'http') == false && str_starts_with($workUrl, '#') == false) {
-                        //only replace internal links
+                    if (str_starts_with($workUrl, 'http') == false && str_ends_with($workUrl, '.html') && str_starts_with($workUrl, '#') == false) {
+                        // is an internal link
                         $spl = explode('/', $workUrl);
                         $itemName = urldecode(end($spl));
 
@@ -341,6 +362,7 @@ class N2webFolderItem
                         $newUrl = str_replace('%3B', '', $newUrl);
                         $html = str_replace($oldUrl, $newUrl, $html);
                     } else {
+                        // is an external links
                         if ($arr_length > 600) {
                             // to many links -> no class replacement (it is not mandatory)
                             return $html;
@@ -354,7 +376,11 @@ class N2webFolderItem
                                 $newStr = 'href="' . $oldUrl;
                             }
 
+                            if(str_contains($newStr, 'class="')){
                             $newStr = str_replace('class="', 'class="n2web_external_link ', $newStr);
+                            }else{
+                                $newStr = str_replace('href="', 'class="n2web_external_link" href="', $newStr);
+                            }
                             $html = str_replace($replaceStr, $newStr, $html);
                         }
                     }
@@ -530,7 +556,8 @@ function build_sorter($key)
     };
 }
 
-function searchBreadcrumbs($searchTerm){
+function searchBreadcrumbs($searchTerm)
+{
     $ret = '<div class="n2web_breadcrumb_item"><a href="/?q=' . $searchTerm . '">Search results</a></div>';
     return $ret;
 }

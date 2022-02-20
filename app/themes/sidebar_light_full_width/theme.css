@@ -26,9 +26,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .n2web_structure {
-    width: 80%;
+    /* width: 80%; */
     margin: 0 auto;
-    max-width: 1260px;
+    /* max-width: 1260px; */
 }
 
 .n2web_header {
@@ -41,11 +41,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .n2web_header_inner {
-    width: 80%;
+    /* width: 80%; */
     margin: 0 auto;
-    max-width: 1260px;
+    /* max-width: 1260px; */
     height: 50px;
     border-bottom: 1px solid #eeedeb;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .n2web_content {
@@ -56,11 +58,12 @@ h1, h2, h3, h4, h5, h6 {
 .n2web_content_inner {
     margin-left: 265px;
     overflow: scroll;
+    padding-right: 15px;
 }
 
 .n2web_sidebar {
     width: 250px;
-    height: calc(100vH - 100px);
+    height: calc(100vH - 50px);
     border-right: 1px solid #eeedeb;
     position: fixed;
     top: 50px;
@@ -112,7 +115,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .n2web_documenttree {
     float: left;
-    height: calc(100% - 60px);
+    height: calc(100% - 110px);
     overflow: scroll;
     /* border: 1px solid; */
     width: 100%;
@@ -153,6 +156,11 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
     color: #111;
     display: inline-block;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+a.n2web_external_link::after {
+    content: " ↗";
 }
 
 .n2web_footer {
@@ -163,7 +171,10 @@ h1, h2, h3, h4, h5, h6 {
     top: 100vH;
     position: sticky;
     margin: 0 auto;
-    max-width: 1260px;
+    /* max-width: 1260px; */
+    background: #fdfcfa;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 
@@ -423,6 +434,8 @@ article a {
 article img.page-cover-image {
     border-radius: 5px;
     box-shadow: 0 2px 4px #d3cfc6;
+    width: calc(100% - 6px);
+    margin: 3px;
 }
 
 article .table_of_contents-link {
@@ -446,7 +459,8 @@ article img {
 }
 
 article {
-    animation: opacity-fade 0.5s;
+    animation: opacity-fade 0.5s; */
+    padding-right: 15px;
 }
 article img {
     animation: opacity-fade 1s;
@@ -520,7 +534,8 @@ article a span.icon {
 } */
 
 article .block-color-red_background,
-article .block-color-blue_background {
+article .block-color-blue_background,
+article .block-color-teal_background {
     border-radius: 5px;
     padding: 5px;
 }
