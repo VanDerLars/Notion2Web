@@ -2,6 +2,9 @@
 
 N2Web turns your Notion HTML export into a fully functional static website.
 
+![Artboard](https://user-images.githubusercontent.com/9517567/154849583-5907457e-f49f-43bc-b4ba-981a5eab9719.png)
+
+
 ## What is Notion?
 Notion is an online tool. But I can't tell you what it really is. It combines a content-management-system, a project-management-tool in a single no-code application builder. It is extremely versatile and in the end, it's what you make with it.
 
