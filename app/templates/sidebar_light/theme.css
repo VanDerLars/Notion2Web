@@ -445,8 +445,11 @@ article img {
     opacity: 0;
 }
 
-article img {
+article {
     animation: opacity-fade 0.5s;
+}
+article img {
+    animation: opacity-fade 1s;
 }
 
 article img {
