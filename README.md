@@ -2,13 +2,26 @@
 
 N2Web turns your Notion HTML export into a fully functional static website.
 
+![Artboard](https://user-images.githubusercontent.com/9517567/154849583-5907457e-f49f-43bc-b4ba-981a5eab9719.png)
+
+
 ## What is Notion?
 Notion is an online tool. But I can't tell you what it really is. It combines a content-management-system, a project-management-tool in a single no-code application builder. It is extremely versatile and in the end, it's what you make with it.
 
 ## What is Notion2Web?
 N2Web (this program here) takes the Notion HTML export and turns it into an own website. The HTML export is really well done, but it lacks on some features (more about below).
 
-Also N2Web gives developers the ability to 
+
+# the compact feature list of N2Web
+- ⏱️ **Set up in minutes** - no programming knowledge required. Simple drag and drop files into the "contents" folder and you're good to go.
+- ⚡ **Super fast**
+- 🎛️ **Editable menus**
+- 🎮 Self hosting **gives you control**
+- 🛂 technically **GDPR compliant** right away (if you host in Europe)
+- 📐 **Themeable** - 4 themes already installed
+- 👩‍💻 **Hackable** - easy code, simple structure
+- 🔎 **Inbuilt search**, which shows the relevance of a search result and calculates the importantcy of the search term to page.
+- 
 
 ### Why shouldn't I use the inbuilt "share to web function" in Notion?
 First of all: you can! The share-to-web function in Notion is great. But it also has some problems, which N2Web tries to solve:
@@ -46,7 +59,11 @@ The HTML export is really well made, but it lacks on some features:
 
 ## Dokumentation & Demo
 I've set up a more complete documentation as demo here:
-→ LINK
+https://notion2web.lehmann.wtf/
 
 ## Customization
-Fell free to customize it. You'll find sophisticated informations in documentation.
+Feel free to customize it. You'll find sophisticated informations in documentation.
+
+
+
+
