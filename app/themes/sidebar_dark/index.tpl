@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="app/css/n2web.css">
     <link rel="stylesheet" href="app/themes/{$theme}/theme.css">
+    <link rel="stylesheet" href="app/themes/{$theme}/theme_mobile.css">
 
     <script src="app/js/jquery-3.6.0.min.js"></script>
     <script src="app/themes/{$theme}/theme.js"></script>
@@ -24,11 +25,14 @@
         <div class="n2web_header_inner">
             <div class="n2web_header_main_logo">
                 <a href="/">
-                    <img src="{$main_logo_dark}" alt="">
+                    <img src="{$main_logo_light}" alt="">
                     <div class="n2web_header_main_title">
                         <h1>{$page_title}</h1>
                     </div>
                 </a>
+            </div>
+            <div class="n2web_header_mobile_menu_button n2web_menu_item">
+                ☰
             </div>
             <div class="n2web_header_menu menu_left">
                 {foreach from=$menu_left item=link key=caption}

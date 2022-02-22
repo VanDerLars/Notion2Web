@@ -37,6 +37,16 @@ $(document).ready(function () {
         let element = $(n2webid);
         highlightJumpMark(element);
     });
+    $(".n2web_header_mobile_menu_button").click(function (){
+        var element =   $(".n2web_header_menu.menu_right");
+        if($(element).hasClass('opened')){
+            $(element).removeClass('opened');
+            $(element).removeClass('opened');
+        }else{
+            $(element).addClass('opened');
+            $(element).addClass('opened');
+        }
+    })
 
 });
 
