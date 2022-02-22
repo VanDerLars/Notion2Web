@@ -523,13 +523,23 @@ article figure.image img {
 article a span.icon {
     line-height: 18px;
 }
-/* article .link-to-page {
-    margin: 5px 0;
-} */
 
 article .block-color-red_background,
 article .block-color-blue_background,
-article .block-color-teal_background {
+article .block-color-teal_background,
+article .block-color-orange_background {
     border-radius: 5px;
-    padding: 5px;
+}
+
+.block-color-teal_background a {
+    background: #bbd9b6;
+}
+.block-color-blue_background a {
+    background: #add2e1;
+}
+.block-color-red_background a {
+    background: #e9c4c7;
+}
+.block-color-orange_background a {
+    background: #e3ccb6;
 }
