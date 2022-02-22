@@ -39,6 +39,12 @@
         padding: 0px 8px;
         display: block;
     }
+    .column, .column-list {
+        width: 100% !important;
+        display: block !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
 }
 
 @media screen and (max-width:425px) {
