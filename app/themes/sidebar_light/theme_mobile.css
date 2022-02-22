@@ -1,3 +1,7 @@
+
+.n2web_header_mobile_menu_button {
+    display: none;
+}
 @media screen and (max-width:1024px) {
     .n2web_structure{
         width: 100%;
@@ -9,6 +13,31 @@
     }
     .n2web_content_inner{
         padding-right: 15px;
+    }
+
+    .n2web_header_menu.menu_right {
+        background: #fff;
+        box-shadow: 0px 3px 5px #00000038;
+        border-radius: 5px;
+        top: 45px;
+        position: absolute;
+        right: 15px;
+        display: none;
+    }
+    .n2web_header_menu.menu_right.opened{
+        display: block;
+    }
+    .menu_right .n2web_menu_item {
+        float: none;
+    }
+    .n2web_header_menu a{
+        text-decoration: none;
+    }
+    .n2web_header_mobile_menu_button {
+        float: right;
+        font-size: 24px;
+        padding: 0px 8px;
+        display: block;
     }
 }
 
@@ -39,28 +68,5 @@
     }
     .n2web_searchResults{
         margin-top: 0;
-    }
-    .n2web_header_menu.menu_right {
-        background: #fff;
-        box-shadow: 0px 3px 5px #00000038;
-        border-radius: 5px;
-        top: 45px;
-        position: absolute;
-        right: 15px;
-        display: none;
-    }
-    .n2web_header_menu.menu_right.opened{
-        display: block;
-    }
-    .menu_right .n2web_menu_item {
-        float: none;
-    }
-    .n2web_header_menu a{
-        text-decoration: none;
-    }
-    .n2web_header_mobile_menu_button {
-        float: right;
-        font-size: 24px;
-        padding: 0px 8px;
     }
 }
