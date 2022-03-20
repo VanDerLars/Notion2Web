@@ -63,6 +63,8 @@ https://notion2web.lehmann.wtf/
 ## Customization
 Feel free to customize it. You'll find sophisticated informations in documentation.
 
-
+## Docker
+You can run this software in Docker. I included Dockerfiles for Intel and ARM based chips. 
+Also, there's a public Docker image https://hub.docker.com/r/vanderlars/notion2web. If you use this image, then you have to mount the folder with your Notion HTML export into `/content`. 
 
 
