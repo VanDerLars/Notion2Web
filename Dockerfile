@@ -20,3 +20,8 @@ EXPOSE 80
 RUN ln -s /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-enabled/
 RUN rm /var/www/html/index.html
 RUN service apache2 restart
+
+# docker build -t n2web-arm:latest.arm -f ./Dockerfile-arm .
+# docker build -t n2web:latest -f ./Dockerfile .
+#docker push vanderlars/notion2web:latest;
+#docker push vanderlars/notion2web-arm:latest;

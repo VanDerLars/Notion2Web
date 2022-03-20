@@ -52,61 +52,28 @@
             </div>
         </div>
     </div>
-
     <div class="n2web_structure">
         <div class="n2web_content">
             <div class="n2web_sidebar">
                 <div class="n2web_search">
                     <div class="n2web_search_box">
                         <form action="index.php" method="post">
-                            <input type="text" name="search" placeholder="Search" value="{$searchTerm}">
+                            <input type="text" name="search" placeholder="Search" value="">
                         </form>
                     </div>
                 </div>
                 <div class="n2web_documenttree">
-                    {$document_tree}
+
                 </div>
 
             </div>
 
             <div class="n2web_content_inner">
                 <div id="top"></div>
-                <div class="n2web_breadcrumbs">
-                {if $is_search eq true}
-                    {$searchBreadcrumbs}
-                {else}
-                    {$breadcrumbs}
-                {/if}
+
+                <div class="n2web_article">
+                    {$noAccessMessage}
                 </div>
-                {if $is_search eq true}
-                <div class="n2web_searchResults">
-
-
-                        <h2>Search results for "<i>{$searchTerm}</i>"</h2>
-
-                        <div class="n2web_searchResults_inner">
-                            {foreach from=$searchResults key=res item=i}
-                                <a href="?path={$i.path}&name={$i.fileName}&id={$i.id}">
-                                    <div class="n2web_search_result">
-                                        <h3 class="n2web_search_result_name">{$i.title}</h3>
-                                        <hr>
-                                        <small>{$i.pathFormatted}</small>
-                                        <br>
-                                        <code>Rank: {assign var="rank" value=$i.rank * 100000}
-                                            {$rank|string_format:"%.2f"}</code>
-                                        <p class="n2web_search_result_excerpt">{$i.excerpt}</p>
-                                    </div>
-                                </a>
-                            {/foreach}
-                        </div>
-                    </div>
-
-                {else}
-
-                    <div class="n2web_article">
-                        {$selectedItem->html}
-                    </div>
-                {/if}
 
             </div>
         </div>

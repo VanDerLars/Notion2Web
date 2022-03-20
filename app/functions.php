@@ -59,6 +59,9 @@ class N2webFolderItem
         } else {
         }
 
+        if ($this->objectType == 1 && $loadHtml == true) {
+            $this->html = str_replace($this->title, $this->removePrefixesAtBeginning($this->title), $this->html);
+        }
 
         // load children when directory
         $childrenWrongOrder = [];
@@ -124,15 +127,72 @@ class N2webFolderItem
                 $this->loadHTML();
             }
             $cnt = $this->html;
+            $sanitizeTitle = '';
 
             preg_match('~(?s)(?<=<h1\ class\=\"page\-title\"\>)(.+?)(?=<\/h1>)~', $cnt, $title_match);
             if (count($title_match) > 0) {
                 $sanitizeTitle = preg_replace('~<[^>]*>~', '', $title_match[0]);
-                return $sanitizeTitle;
             } else {
-                return $this->name;
+                $sanitizeTitle = $this->name;
+            }
+            $title_with_numbers = $sanitizeTitle;
+            // remove numbers from titles (if set in config)
+            global $remove_beginning_numbers;
+            if ($remove_beginning_numbers == true && $this->startsWithNumber($sanitizeTitle)) {
+                //change title 
+                $sanitizeTitle = $this->removeNumbersAtBeginning($sanitizeTitle);
+
+                //replace it also in the html
+                $this->html = str_replace($title_with_numbers, $sanitizeTitle, $this->html);
+            }
+
+            return $sanitizeTitle;
+        }
+    }
+    private function startsWithNumber($str)
+    {
+        $nbrs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $ret = false;
+        foreach ($nbrs as $nbr) {
+            if (str_starts_with($str, $nbr)) {
+                $ret = true;
             }
         }
+        return $ret;
+    }
+    private function removeNumbersAtBeginning($str)
+    {
+        $spl = explode(' ', $str);
+        array_splice($spl, 0, 1);
+        $ret = implode(' ', $spl);
+        return $ret;
+    }
+    private function removePrefixesAtBeginning($str)
+    {
+        global $hide_from_navigation_with_prefix;
+        if (count($hide_from_navigation_with_prefix) > 0) {
+            foreach ($hide_from_navigation_with_prefix as $prefix) {
+                if (str_starts_with($str, $prefix)) {
+                    $str = str_replace($prefix, '', $str);
+                }
+            }
+        }
+
+        return $str;
+    }
+    private function displayPageInNavigation()
+    {
+        //tells you weather a page with a specific prefix should be displayed in the navigation or not
+        global $hide_from_navigation_with_prefix;
+        $ret = true;
+        if (count($hide_from_navigation_with_prefix) > 0) {
+            foreach ($hide_from_navigation_with_prefix as $prefix) {
+                if (str_starts_with($this->fileName, $prefix)) {
+                    $ret = false;
+                }
+            }
+        }
+        return $ret;
     }
 
     public function getBreadcrumbs()
@@ -246,7 +306,7 @@ class N2webFolderItem
         foreach ($theNewOrder as $child) {
             if ($child->objectType == 1) {
                 // file
-                if (str_ends_with($child->fileName, '.html') == true) {
+                if (str_ends_with($child->fileName, '.html') == true && $child->displayPageInNavigation()) {
                     $class_has_children = '';
                     $div_has_children = '';
                     if ($child->hasSubItems()) {
@@ -259,7 +319,9 @@ class N2webFolderItem
                 }
             } else {
                 // directory
-                $ret .= '<ul class="n2web_group" id="' . $child->id . '_dir" data-n2webid="' . $child->id . '">' . $child->getFileTree() . '</ul>';
+                if ($child->displayPageInNavigation()) {
+                    $ret .= '<ul class="n2web_group" id="' . $child->id . '_dir" data-n2webid="' . $child->id . '">' . $child->getFileTree() . '</ul>';
+                }
             }
         }
         $ret .= '';
@@ -329,8 +391,8 @@ class N2webFolderItem
         // 3.replace hyperlinks
         preg_match_all('/<a[^>]* href="([^"]*)"/im', $html, $link_match);
         $this_match = $link_match[1];
-        $imageFormats = ['.png','.svg','.bmp','.jpg','.jpeg','.webp', '.tif', '.tiff', '.gif', '.eps', '.apng', '.avif', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.ico', '.cur'];
-               
+        $imageFormats = ['.png', '.svg', '.bmp', '.jpg', '.jpeg', '.webp', '.tif', '.tiff', '.gif', '.eps', '.apng', '.avif', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.ico', '.cur'];
+
         if ($this_match) {
             $arr_length = count($this_match);
             for ($i = 0; $i < $arr_length; $i++) {
@@ -340,8 +402,8 @@ class N2webFolderItem
 
                 // check if url is an image
                 $isImage = false;
-                foreach($imageFormats as $format){
-                    if (str_ends_with($workUrl, $format)){
+                foreach ($imageFormats as $format) {
+                    if (str_ends_with($workUrl, $format)) {
                         $isImage = true;
                     }
                 }
@@ -382,9 +444,9 @@ class N2webFolderItem
                                 $newStr = 'href="' . $oldUrl;
                             }
 
-                            if(str_contains($newStr, 'class="')){
-                            $newStr = str_replace('class="', 'class="n2web_external_link ', $newStr);
-                            }else{
+                            if (str_contains($newStr, 'class="')) {
+                                $newStr = str_replace('class="', 'class="n2web_external_link ', $newStr);
+                            } else {
                                 $newStr = str_replace('href="', 'class="n2web_external_link" href="', $newStr);
                             }
                             $html = str_replace($replaceStr, $newStr, $html);
@@ -393,6 +455,18 @@ class N2webFolderItem
                 } else {
                     // image link
                 }
+            }
+        }
+
+        // replace prefix for hidden pages
+        preg_match_all('/<a.*?>(.+?)<\/a>/im', $html, $output_array);
+        $this_match_2 = $output_array[1];
+
+        if ($this_match_2) {
+            $arr_length = count($this_match_2);
+            for ($i = 0; $i < $arr_length; $i++) {
+                $oldUrl = $this_match_2[$i];
+                $html = str_replace($oldUrl, $this->removePrefixesAtBeginning($oldUrl), $html);
             }
         }
 
@@ -479,7 +553,6 @@ class N2webFolderItem
 // search functions
 function get_corpus_index($corpus = array(), $separator = ' ')
 {
-
     $dictionary = array();
     $doc_count = array();
 
@@ -502,9 +575,7 @@ function get_corpus_index($corpus = array(), $separator = ' ')
 
             $dictionary[$term]['postings'][$doc_id]['term_frequency']++;
         }
-
         //from http://phpir.com/simple-search-the-vector-space-model/
-
     }
 
     return array('doc_count' => $doc_count, 'dictionary' => $dictionary);
@@ -551,15 +622,6 @@ function get_similar_documents($query = '', $corpus = array(), $separator = ' ')
         arsort($similar_documents);
     }
     return $similar_documents;
-}
-
-
-
-function build_sorter($key)
-{
-    return function ($a, $b) use ($key) {
-        return strnatcmp($a[$key], $b[$key]);
-    };
 }
 
 function searchBreadcrumbs($searchTerm)

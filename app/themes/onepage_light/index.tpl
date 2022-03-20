@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="app/themes/{$theme}/theme.css">
     <link rel="stylesheet" href="app/themes/{$theme}/theme_mobile.css">
 
+	<link href='https://fonts.googleapis.com/css?family=Nunito+Sans:200&subset=latin' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Nunito+Sans&subset=latin' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Nunito+Sans:700&subset=latin' rel='stylesheet' type='text/css'>
+
     <script src="app/js/jquery-3.6.0.min.js"></script>
     <script src="app/themes/{$theme}/theme.js"></script>
 </head>
@@ -55,7 +59,7 @@
 
     <div class="n2web_structure">
         <div class="n2web_content">
-            <div class="n2web_sidebar">
+            {* <div class="n2web_sidebar">
                 <div class="n2web_search">
                     <div class="n2web_search_box">
                         <form action="index.php" method="post">
@@ -67,20 +71,20 @@
                     {$document_tree}
                 </div>
 
-            </div>
+            </div> *}
 
             <div class="n2web_content_inner">
                 <div id="top"></div>
-                <div class="n2web_breadcrumbs">
+                {* <div class="n2web_breadcrumbs">
                 {if $is_search eq true}
                     {$searchBreadcrumbs}
                 {else}
                     {$breadcrumbs}
                 {/if}
-                </div>
-                {if $is_search eq true}
+                </div> *}
                 <div class="n2web_searchResults">
 
+                    {if $is_search eq true}
 
                         <h2>Search results for "<i>{$searchTerm}</i>"</h2>
 
