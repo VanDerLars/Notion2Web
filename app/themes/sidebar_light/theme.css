@@ -543,3 +543,11 @@ article .block-color-orange_background {
 .block-color-orange_background a {
     background: #e3ccb6;
 }
+.block-color-gray a {
+    color: #706f6f;
+    background: transparent;
+}
+article .block-color-gray {
+    color: #706f6f;
+    fill: #706f6f;
+}
