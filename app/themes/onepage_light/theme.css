@@ -526,6 +526,7 @@ article ul.toggle>li {
 article figure.image img {
     border-radius: 15px;
     box-shadow: 0 5px 20px #85858587;
+    max-width: calc(100% - 20px);
 }
 article a span.icon {
     line-height: 18px;
