@@ -577,3 +577,48 @@ figure .source {
     border: none;
     box-shadow: 0 5px 20px #85858587;
 }
+
+
+.image,
+.lightbox-opened{
+    transition: all 0.3s ease;
+}
+.lightbox-opened {
+    background-color: #ffffffe6;
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    overflow-y: scroll;
+    padding: 24px;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    animation: lightbox-in 0.5s;
+}
+
+@keyframes lightbox-in {
+    0% {
+    opacity: 0.5;
+    padding: 100px;
+    }
+
+    100% {
+        opacity: 1;
+        padding: 24px;
+    }
+}
+
+.lightbox-opened img {
+    box-shadow:  0 0 6px 3px #33333352;;
+}
+
+.lightbox-opened img {
+    max-width: 100%;
+    border-radius: 10px;
+    max-height: calc(100% - 48px);
+}
+
+.no-scroll {
+    overflow: hidden;
+}

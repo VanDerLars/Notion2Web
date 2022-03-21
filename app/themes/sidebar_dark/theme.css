@@ -19,3 +19,47 @@ html, body { font-family: inter-var, -apple-system, BlinkMacSystemFont, "Segoe U
   0% { opacity: 0; }
   100% { opacity: 1; }
 }.n2web_menu_item { float: left; padding: 6px 8px; margin: 10px 3px; border-radius: 5px; }.menu_right { float: right; }.n2web_menu_item:hover { background: rgba(0, 0, 0, 0.06); color: rgb(191, 191, 191); }a .n2web_menu_item { color: rgb(191, 191, 191); text-decoration: none; transition: all 0.3s ease 0s; }.footer_menu .n2web_menu_item { font-size: 14px; }.table_of_contents { float: right; padding: 15px; margin-left: 15px; border-radius: 5px; transition: all 0.8s ease 0s; }.table_of_contents:hover { background: rgb(33, 33, 33); }.n2web_header_main_logo { float: left; }.n2web_header_main_logo img, .n2web_header_main_logo a { height: 40px; margin-top: 5px; }.n2web_header_main_title { float: right; }.n2web_header_main_title h1 { color: rgb(191, 191, 191); font-weight: 200; font-size: 28px; padding: 8px; }.n2web_sidebar ul, .n2web_sidebar ul ul, .n2web_sidebar li { font-size: 12px; }li.n2web_file { list-style: none; padding: 2px 5px; margin: 2px 5px; border-radius: 3px; }li.n2web_file a { color: rgba(191, 191, 191, 0.6); font-size: 15px; line-height: 22px; text-decoration: none; font-weight: 430; padding: 0px 4px; border-radius: 3px; display: inline-block; }article a, summary { transition: all 0.3s ease 0s; }article a { background: rgb(65, 48, 16); }article figure.image a, article a.bookmark { background: transparent; }article a { padding: 3px 4px; margin: 0px -4px; border-radius: 3px; color: rgb(191, 191, 191); }article img.page-cover-image { border-radius: 5px; box-shadow: rgb(86, 80, 67) 0px 2px 4px; width: calc(100% - 6px); margin: 3px; }article .table_of_contents-link { opacity: 1; }li.n2web_file a:hover, article a:hover, summary:hover, a.table_of_contents-link:hover { color: rgb(191, 191, 191); background: rgba(0, 0, 0, 0.06); }figure.image a:hover { background: transparent; }article img { opacity: 0; }article { animation: 0.5s ease 0s 1 normal none running opacity-fade; }article img { animation: 1s ease 0s 1 normal none running opacity-fade; }article img { opacity: 1; }.callout a:hover { color: rgb(191, 191, 191); background: rgb(28, 28, 28); }li.n2web_file a, .n2web_file.has_children a { max-width: calc(100% - 22px); transition: background 0.3s ease 0s, color 0.3s ease 0s; }li.n2web_file.selected a, .n2web_file.has_children.opened a { font-weight: 600; color: rgb(191, 191, 191); }figure:not(.image) a[target="_blank"]:not(.bookmark-image):not(.bookmark)::after { content: " ↗"; left: 0px; }article .code, article code { font-size: 100%; }article li, article ul, article p, .callout { line-height: 24px; }article p { margin-top: 0px; margin-bottom: 15px; }article .code, article .bookmark-info { overflow: scroll; }summary { cursor: pointer; padding: 3px 3px 3px 6px; margin: -3px -3px -3px -6px; border-radius: 3px; }article ul.toggle > li { list-style: none; overflow: scroll; }article figure.image img { border-radius: 5px; box-shadow: rgb(86, 80, 67) 0px 2px 4px; }article a span.icon { line-height: 18px; }article .block-color-red_background, article .block-color-blue_background, article .block-color-teal_background { border-radius: 5px; padding: 5px; }
+
+.image,
+.lightbox-opened{
+    transition: all 0.3s ease;
+}
+.lightbox-opened {
+    background-color: #ffffffe6;
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    overflow-y: scroll;
+    padding: 24px;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    animation: lightbox-in 0.5s;
+}
+
+@keyframes lightbox-in {
+    0% {
+    opacity: 0.5;
+    padding: 100px;
+    }
+
+    100% {
+        opacity: 1;
+        padding: 24px;
+    }
+}
+
+.lightbox-opened img {
+    box-shadow:  0 0 6px 3px #33333352;;
+}
+
+.lightbox-opened img {
+    max-width: 100%;
+    border-radius: 10px;
+    max-height: calc(100% - 48px);
+}
+
+.no-scroll {
+    overflow: hidden;
+}
