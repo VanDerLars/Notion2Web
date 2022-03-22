@@ -56,7 +56,7 @@ The HTML export is really well made, but it lacks on some features:
 - Upload the whole Notion2Web folder to your Webserver (PHP has to be enabled on you server)
 - → thats it, the Notion export is now available on you website (when its root directory is pointing into uploaded folder)
 
-## Dokumentation & Demo
+## Documentation & Demo
 I've set up a more complete documentation as demo here:
 https://notion2web.lehmann.wtf/
 
