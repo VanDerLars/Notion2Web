@@ -1,3 +1,5 @@
+### ⚠️ Discontinued: Notion2Web is discontinued. I remains working, when you're familiar with PHP and is still a good solution for some usecases, but It doesn't get updates from me anymore. Open issues remain open to inform you about existing bugs, which you might wanna solve yourself.
+
 # Notion2Web
 
 N2Web turns your Notion HTML export into a fully functional static website.
